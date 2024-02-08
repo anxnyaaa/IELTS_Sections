@@ -9,7 +9,6 @@ import Test from "./components/Test";
 import CardLocked from "./components/CardLocked";
 import LevelLocked from "./components/LevelLocked";
 
-
 export default function App() {
   return (
     <View style={styles.container}>
