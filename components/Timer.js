@@ -30,45 +30,45 @@ const App = () => {
             </Text>
     
             <View style={styles.sectionStyle}>
-      <Timer
-        totalDuration={timerDuration}
-        msecs
-        
-        start={isTimerStart}
-        
-        reset={resetTimer}
-       
-        options={options}
-     
-        handleFinish={() => {
-          alert('Completion Function');
-        }}
-      
-        getTime={(time) => {
-          console.log(time);
-        }}
-      />
+            <Timer
+                totalDuration={timerDuration}
+                msecs
+                
+                start={isTimerStart}
+                
+                reset={resetTimer}
+            
+                options={options}
+            
+                handleFinish={() => {
+                alert('Completion Function');
+                }}
+            
+                getTime={(time) => {
+                console.log(time);
+                }}
+            />
 
-<TouchableHighlight
-        onPress={() => {
-          setIsTimerStart(!isTimerStart);
-          setResetTimer(false);
-        }}>
-        <Text style={styles.buttonText}>
-          {!isTimerStart ? 'START' : 'STOP'}
-        </Text>
-      </TouchableHighlight>
-      <TouchableHighlight
-        onPress={() => {
-          setIsTimerStart(false);
-          setResetTimer(true);
-        }}>
-        <Text style={styles.buttonText}>RESET</Text>
-      </TouchableHighlight>
-    </View>
-    </View>
-    </SafeAreaView>
-  );
+            <TouchableHighlight
+                    onPress={() => {
+                    setIsTimerStart(!isTimerStart);
+                    setResetTimer(false);
+                    }}>
+                    <Text style={styles.buttonText}>
+                    {!isTimerStart ? 'START' : 'STOP'}
+                    </Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    onPress={() => {
+                    setIsTimerStart(false);
+                    setResetTimer(true);
+                    }}>
+                    <Text style={styles.buttonText}>RESET</Text>
+                </TouchableHighlight>
+                </View>
+                </View>
+                </SafeAreaView>
+            );
 };
 
 export default App;
