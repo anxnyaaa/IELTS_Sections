@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
     padding: 6,
     borderRadius: 30,
   },
-  buttonLocked: {
+  buttonLocked: {    
+    opacity: .75,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",

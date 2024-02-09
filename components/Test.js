@@ -12,7 +12,7 @@ const lockTestAlert = () =>
 );
 
 function Test({ level }) {
-  return (
+  return (    
     <View style={styles.cardAdvance}>
       <View style={styles.cardAdvanceContent}>
         <View style={styles.cardAdvanceContentHeading}>
@@ -46,13 +46,13 @@ function Test({ level }) {
           </View>
         </View>
       </View>
+
       <Pressable style={[styles.button, { padding: 10 }]} onPress={lockTestAlert} android_ripple={{color: '#839efc'}}>
         <View style={styles.testButton}>
           <Text style={{ color: "white", fontWeight: 500 }}>Take Test</Text>
           <Ionicons name="lock-closed-outline" size={18} color="white" />
         </View>
       </Pressable>
-      {/*<Timer/>*/}
     </View>
   );
 }
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   button: {
+    opacity: .75,
     backgroundColor: "#1F41BB",
     color: "white",
     textAlign: "center",

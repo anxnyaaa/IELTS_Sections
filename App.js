@@ -12,6 +12,7 @@ import LevelLocked from "./components/LevelLocked";
 import Stopclock from "./timer/Stopclock";
 
 export default function App() {
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -23,12 +24,12 @@ export default function App() {
         </View>  
         
         {/*Level 1*/}
-        <Level lno="1" progress={0.5} />        
+        <Level lno="1" progress={0.33} />        
         <Card icon= "reader-outline" topic="Scanning" />
         <CardLocked icon= "reader-outline" topic = "Skimming"/>
-
+        
         <Test level="1"/>
-          
+
         <Stopclock/>
 
         {/*Level 2*/}

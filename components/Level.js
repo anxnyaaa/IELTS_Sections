@@ -8,7 +8,7 @@ function Level({ lno, progress }) {
             <Text style={styles.levelHeading}>Level {lno}</Text>
         </View>
         <Progress.Bar progress={progress} width={340} color="#385682" />
-        <Text style={styles.levelText}>50% completed</Text>
+        <Text style={styles.levelText}>33% completed</Text>
     </View>
 
   );
