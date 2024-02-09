@@ -14,6 +14,7 @@ const App = () => {
           borderRadius: 5,
           width: 200,
           alignItems: 'center',
+          
         },
         text: {
           fontSize: 25,
