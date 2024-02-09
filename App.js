@@ -28,13 +28,15 @@ export default function App() {
         <CardLocked icon= "reader-outline" topic = "Skimming"/>
 
         <Test level="1"/>
-
+          
         <Stopclock/>
 
         {/*Level 2*/}
         <LevelLocked lno="2" progress={0.03}/>
         <CardLocked icon= "reader-outline" topic="In-Notation"/>
         <StatusBar style="auto" />
+
+        
 
       </ScrollView>
     </View>
