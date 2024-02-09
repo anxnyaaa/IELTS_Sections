@@ -6,7 +6,11 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-expo"
   },
   "dependencies": {
     "expo": "~50.0.6",
@@ -15,7 +19,9 @@
     "react-native": "0.73.4",
     "react-native-ionicons": "^4.6.5",
     "react-native-progress": "^5.0.1",
-    "react-native-stopwatch-timer": "^0.0.21"
+    "react-native-stopwatch-timer": "^0.0.21",
+    "jest-expo": "~50.0.2",
+    "jest": "^29.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

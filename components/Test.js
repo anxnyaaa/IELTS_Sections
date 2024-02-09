@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, Pressable, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Timer from "./Timer"
+//import Timer from "./Timer"
 
 const lockTestAlert = () =>
   Alert.alert('No Cheating!', 'You must complete the previous lectures.', [
@@ -53,7 +53,7 @@ function Test({ level }) {
           <Ionicons name="lock-closed-outline" size={18} color="white" />
         </View>
       </Pressable>
-      <Timer/>
+      {/*<Timer/>*/}
     </View>
   );
 }

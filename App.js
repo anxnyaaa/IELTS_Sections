@@ -9,6 +9,8 @@ import Test from "./components/Test";
 import CardLocked from "./components/CardLocked";
 import LevelLocked from "./components/LevelLocked";
 
+import Stopclock from "./timer/Stopclock";
+
 export default function App() {
   return (
     <View style={styles.container}>
@@ -27,10 +29,13 @@ export default function App() {
 
         <Test level="1"/>
 
+        <Stopclock/>
+
         {/*Level 2*/}
         <LevelLocked lno="2" progress={0.03}/>
         <CardLocked icon= "reader-outline" topic="In-Notation"/>
         <StatusBar style="auto" />
+
       </ScrollView>
     </View>
   );
