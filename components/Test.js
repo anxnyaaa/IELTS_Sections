@@ -1,6 +1,5 @@
 import { Text, View, StyleSheet, Pressable, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-//import Timer from "./Timer"
 
 const lockTestAlert = () =>
   Alert.alert('No Cheating!', 'You must complete the previous lectures.', [

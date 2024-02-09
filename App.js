@@ -36,7 +36,7 @@ export default function App() {
         <CardLocked icon= "reader-outline" topic="In-Notation"/>
         <StatusBar style="auto" />
 
-        
+        <Test level="2"/>     
 
       </ScrollView>
     </View>
