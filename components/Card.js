@@ -1,7 +1,8 @@
-import { Text, View, StyleSheet, Pressable, Alert } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import React from 'react';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-function Card({ icon, topic }) {
+function Card({ icon, topic, unlockFunction }) {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardContent}>
@@ -23,7 +24,7 @@ function Card({ icon, topic }) {
           <Text>50 Min</Text>
         </View>
       </View>
-      <Pressable style={styles.button} android_ripple={{color: '#839efc', opacity: 0.5}}>
+      <Pressable style={styles.button} onPress={unlockFunction} android_ripple={{color: '#839efc'}}>
         <Text style={styles.buttonText}>Watch Video</Text>
       </Pressable>
     </View>

@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, ScrollView, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -13,6 +14,12 @@ import Stopclock from "./timer/Stopclock";
 
 export default function App() {
 
+  const [unlocked, setUnlocked] = useState(false);
+
+  const unlockFunction = () => {
+    setUnlocked(true);
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -25,10 +32,10 @@ export default function App() {
         
         {/*Level 1*/}
         <Level lno="1" progress={0.33} />        
-        <Card icon= "reader-outline" topic="Scanning" />
-        <CardLocked icon= "reader-outline" topic = "Skimming"/>
+        <Card icon= "reader-outline" topic="Scanning" unlockFunction={unlockFunction}/>
+        <CardLocked icon= "reader-outline" topic = "Skimming" unlocked={unlocked}/>
         
-        <Test level="1"/>
+        <Test level="1" />
 
         <Stopclock/>
 

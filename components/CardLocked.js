@@ -1,17 +1,20 @@
-import { Text, View, StyleSheet, Alert, Pressable } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import React from 'react';
+import { Text, View, StyleSheet, Pressable, Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-const lockVideoAlert = () =>
-  Alert.alert('No Cheating!', 'You must complete the previous lectures.', [
-    {
-      text: 'Watch',
-      onPress: () => console.log('Watching Previous Lectures'),
-      style: 'destructive'
-    },
-  ],
-);
+function CardLocked({ icon, topic, unlocked }) {
+  const lockVideoAlert = () => {
+    if (!unlocked) {
+      Alert.alert('No Cheating!', 'You must complete the previous lectures.', [
+        {
+          text: 'Watch',
+          onPress: () => console.log('Watching Previous Lectures'),
+          style: 'destructive'
+        },
+      ]);
+    }
+  };
 
-function CardLocked({ icon, topic }) {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardContent}>
@@ -37,10 +40,18 @@ function CardLocked({ icon, topic }) {
           <Text>45 Min</Text>
         </View>
       </View>
-      <Pressable style={styles.button} onPress={lockVideoAlert} android_ripple={{color: '#839efc'}} >
-        <View style={styles.buttonLocked}>
+      <Pressable
+        style={({ pressed }) => [
+          styles.button,
+          unlocked ? styles.buttonUnlocked : styles.buttonLocked,
+          pressed && unlocked && styles.buttonPressed,
+        ]}
+        onPress={unlocked ? null : lockVideoAlert}
+        android_ripple={{ color: '#839efc'}}
+      >
+        <View style={styles.buttonContent}>
           <Text style={styles.buttonText}>Watch Video</Text>
-          <Ionicons name="lock-closed-outline" size={18} color="white" />
+          {!unlocked && <Ionicons name="lock-closed-outline" size={18} color="white" />}
         </View>
       </Pressable>
     </View>
@@ -48,6 +59,7 @@ function CardLocked({ icon, topic }) {
 }
 
 export default CardLocked;
+
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -83,8 +95,18 @@ const styles = StyleSheet.create({
     padding: 6,
     borderRadius: 30,
   },
-  buttonLocked: {    
+  buttonLocked: {
     opacity: .75,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+  },
+  buttonUnlocked: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
