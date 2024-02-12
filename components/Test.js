@@ -39,7 +39,7 @@ function Test({ level, navigation }) {
         </View>
       </View>
 
-      <Pressable style={[styles.button, { padding: 10 }]} onPress={() => navigation.navigate("Test")} android_ripple={{color: '#839efc'}}>
+      <Pressable style={[styles.button, { padding: 10 }]} onPress={() => { navigation.navigate("Exam", { navigation })}} android_ripple={{color: '#839efc'}}>
         <View style={styles.testButton}>
           <Text style={{ color: "white", fontWeight: 500 }}>Take Test</Text>
           <Ionicons name="lock-closed-outline" size={18} color="white" />

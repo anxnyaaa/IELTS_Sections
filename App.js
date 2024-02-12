@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Test from "./components/Test";
 import Stopclock from "./timer/Stopclock";
 
 const Stack = createNativeStackNavigator();
@@ -13,6 +14,7 @@ export default function App() {
     <NavigationContainer style={styles.container}>
       <Stack.Navigator initialRouteName='Levels'>
         <Stack.Screen name="Levels" component={Levels}/>
+        <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="Exam" component={Stopclock}/>
       </Stack.Navigator>
     </NavigationContainer> 

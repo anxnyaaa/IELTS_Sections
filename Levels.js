@@ -12,9 +12,14 @@ import LevelLocked from "./components/LevelLocked";
 
 function Levels({navigation}) {
   const [unlocked, setUnlocked] = useState(false);
+  const [timerStarted, setTimerStarted] = useState(false);
 
   const unlockFunction = () => {
     setUnlocked(true);
+  };
+
+  const handleStart = () => {
+    setTimerStarted(true);
   };
 
   return (
@@ -32,14 +37,14 @@ function Levels({navigation}) {
         <Card icon= "reader-outline" topic="Scanning" unlockFunction={unlockFunction}/>
         <CardLocked icon= "reader-outline" topic = "Skimming" unlocked={unlocked}/>
         
-        <Test level="1" />
+        <Test level="1" navigation={navigation} handleStart={handleStart} />
 
         {/*Level 2*/}
         <LevelLocked lno="2" progress={0.03}/>
         <CardLocked icon= "reader-outline" topic="In-Notation"/>
         <StatusBar style="auto" />
 
-        <Test level="2"/>     
+        <Test level="2" navigation={navigation}/>     
 
       </ScrollView>
     </View>
