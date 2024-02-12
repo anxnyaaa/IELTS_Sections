@@ -1,17 +1,9 @@
+import React from 'react';
 import { Text, View, StyleSheet, Pressable, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-const lockTestAlert = () =>
-  Alert.alert('No Cheating!', 'You must complete the previous lectures.', [
-    {
-      text: 'Watch',
-      onPress: () => console.log('Watching Previous Lectures'),
-      style: 'destructive'
-    },
-  ],
-);
-
-function Test({ level }) {
+function Test({ level, navigation }) {
+  
   return (    
     <View style={styles.cardAdvance}>
       <View style={styles.cardAdvanceContent}>
@@ -47,12 +39,13 @@ function Test({ level }) {
         </View>
       </View>
 
-      <Pressable style={[styles.button, { padding: 10 }]} onPress={lockTestAlert} android_ripple={{color: '#839efc'}}>
+      <Pressable style={[styles.button, { padding: 10 }]} onPress={() => navigation.navigate("Test")} android_ripple={{color: '#839efc'}}>
         <View style={styles.testButton}>
           <Text style={{ color: "white", fontWeight: 500 }}>Take Test</Text>
           <Ionicons name="lock-closed-outline" size={18} color="white" />
         </View>
       </Pressable>
+        
     </View>
   );
 }
