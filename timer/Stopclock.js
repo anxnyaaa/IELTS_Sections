@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import Time from './Time';
 
 export default function StopClock({ route, navigation }) {
@@ -16,14 +16,16 @@ export default function StopClock({ route, navigation }) {
         setTime((prevTime) => {
           if (prevTime <= 0) {
             clearInterval(timerID);
-            setStatus(-1);
-            
+            setStatus(-1);            
             navigation.navigate("Levels"); // Navigate back to "Levels" screen
             return 0;
-          } else if (prevTime <= 10000 && !showAlertRef.current) {
+          } 
+          
+          else if (prevTime <= 10000 && !showAlertRef.current) {
             showAlertRef.current = true;
             showAlert();
           }
+
           return prevTime - 10;
         });
       }, 10);

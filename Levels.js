@@ -44,7 +44,7 @@ function Levels({navigation}) {
         <CardLocked icon= "reader-outline" topic="In-Notation"/>
         <StatusBar style="auto" />
 
-        <Test level="2" navigation={navigation}/>     
+        <Test level="2" navigation={navigation} handleStart={handleStart}/>     
 
       </ScrollView>
     </View>
@@ -58,13 +58,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     justifyContent: "center",
-    margin: 20,
-    marginTop: 50,
+    padding: 20,
+    paddingTop: 20,
   }, 
   header: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    gap: 90
+    gap: 80
   }  
 });

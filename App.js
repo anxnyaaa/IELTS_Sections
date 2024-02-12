@@ -1,9 +1,9 @@
 import React from "react";
-import Levels from "./Levels";
-import { StyleSheet } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import Levels from "./Levels";
 import Test from "./components/Test";
 import Stopclock from "./timer/Stopclock";
 
@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer style={styles.container}>
+    <NavigationContainer>
       <Stack.Navigator initialRouteName='Levels'>
         <Stack.Screen name="Levels" component={Levels}/>
         <Stack.Screen name="Test" component={Test}/>
@@ -21,11 +21,3 @@ export default function App() {
   ) 
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: 'center',
-  }  
-});

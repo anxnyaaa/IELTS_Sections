@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
       level: {
         alignItems: "center",
         gap: 6,
-        marginTop: 10,
+        marginTop: 20,
       },
       levelHeading: {
         fontSize: 15,
