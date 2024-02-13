@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import Time from './Time';
 
-export default function StopClock({ route, navigation }) {
-  const initialTime = 1 * 30 * 1000; // 1m in milliseconds
+export default function StopClock({ onTimerEnd }) {
+  const initialTime = 2 * 60 * 1000; // 2m in milliseconds
   const [time, setTime] = useState(initialTime);
   const [status, setStatus] = useState(1); // -1 => stopped, 1 => playing
   const showAlertRef = useRef(false);
@@ -17,18 +17,18 @@ export default function StopClock({ route, navigation }) {
           if (prevTime <= 0) {
             clearInterval(timerID);
             setStatus(-1);            
-            navigation.navigate("Levels"); // Navigate back to "Levels" screen
+            onTimerEnd();
             return 0;
           } 
           
-          else if (prevTime <= 10000 && !showAlertRef.current) {
+          else if (prevTime <= 20000 && !showAlertRef.current) {
             showAlertRef.current = true;
             showAlert();
           }
 
-          return prevTime - 10;
+          return prevTime - 20;
         });
-      }, 10);
+      }, 20);
     }
 
     return () => {
@@ -38,12 +38,11 @@ export default function StopClock({ route, navigation }) {
 
 
   const showAlert = () => {
-    Alert.alert('Warning!', 'Last 10 seconds left!');
+    Alert.alert('Warning!', 'Last 20 seconds left!');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.remText}>Remaining Time:</Text>
       <Time time={time} />      
     </View>
   );
@@ -51,15 +50,8 @@ export default function StopClock({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
   },
-  remText: {
-    margin: 10,
-    marginTop: 20,
-    fontSize: 20,
-  }
-
 });

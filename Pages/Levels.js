@@ -3,12 +3,12 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, ScrollView, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import Heading from "./components/Heading";
-import Level from "./components/Level";
-import Card from "./components/Card";
-import Test from "./components/Test";
-import CardLocked from "./components/CardLocked";
-import LevelLocked from "./components/LevelLocked";
+import Heading from "../components/Heading";
+import Level from "../components/Level";
+import Card from "../components/Card";
+import Test from "../components/Test";
+import CardLocked from "../components/CardLocked";
+import LevelLocked from "../components/LevelLocked";
 
 function Levels({navigation}) {
   const [unlocked, setUnlocked] = useState(false);

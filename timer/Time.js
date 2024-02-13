@@ -16,7 +16,7 @@ export default function Time({ time }) {
     return (
         <View style={styles.row}>
             <Text style={styles.time}>
-                {transformMinutes()} : <Text> </Text>{transformSeconds()} 
+                {transformMinutes()} : {transformSeconds()} 
             </Text>
         </View>
     );
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         display: 'flex',
     },
     time: {
-        fontSize: 48,
+        fontSize: 28,
         fontWeight: 'bold',
         color: '#1F41BB',
     },
