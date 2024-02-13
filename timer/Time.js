@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
     time: {
         fontSize: 48,
         fontWeight: 'bold',
-        color: '#272727',
+        color: '#1F41BB',
     },
 });

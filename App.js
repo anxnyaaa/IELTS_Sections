@@ -14,7 +14,6 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Levels'>
         <Stack.Screen name="Levels" component={Levels}/>
-        <Stack.Screen name="Test" component={Test}/>
         <Stack.Screen name="Exam" component={Stopclock}/>
       </Stack.Navigator>
     </NavigationContainer> 

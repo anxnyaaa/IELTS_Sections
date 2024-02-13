@@ -43,8 +43,8 @@ export default function StopClock({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Time time={time} />
-      
+      <Text style={styles.remText}>Remaining Time:</Text>
+      <Time time={time} />      
     </View>
   );
 }
@@ -52,9 +52,14 @@ export default function StopClock({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
   },
+  remText: {
+    margin: 10,
+    marginTop: 20,
+    fontSize: 20,
+  }
+
 });
