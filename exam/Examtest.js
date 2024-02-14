@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import {
-	View, Text, TouchableOpacity,
-	StyleSheet
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { Examdata } from './Examdata'
 
 const Quiz = () => {
-	const [currentQuestion, setCurrentQuestion] =
-		useState(0);
+	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [score, setScore] = useState(0);
-	const [quizCompleted, setQuizCompleted] =
-		useState(false);
+	const [quizCompleted, setQuizCompleted] = useState(false);
 	const [timeLeft, setTimeLeft] = useState(10);
 
 	useEffect(() => {
@@ -19,8 +14,7 @@ const Quiz = () => {
 			if (timeLeft > 0) {
 				setTimeLeft(timeLeft - 1);
 			} else {
-				if (currentQuestion <
-					Examdata.length - 1) {
+				if (currentQuestion < Examdata.length - 1) {
 					setCurrentQuestion(currentQuestion + 1);
 					setTimeLeft(10);
 				} else {
