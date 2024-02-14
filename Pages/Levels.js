@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, ScrollView, Pressable } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, View, ScrollView } from "react-native";
 
-import Heading from "../components/Heading";
+import Header from "../components/Header";
 import Level from "../components/Level";
 import Card from "../components/Card";
 import Test from "../components/Test";
@@ -25,12 +24,7 @@ function Levels({navigation}) {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.header}>
-          <Pressable android_ripple={{color: '#839efc'}}>
-            <Ionicons name="menu-outline" size={28} color="#1F41BB" />
-          </Pressable>
-          <Heading icon= "reader-outline" heading="Reading"/>
-        </View>  
+        <Header icon= "reader-outline" heading="Reading"/>
         
         {/*Level 1*/}
         <Level lno="1" progress={0.33} />        
@@ -60,11 +54,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
     paddingTop: 20,
-  }, 
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    gap: 80
-  }  
+  }
 });
