@@ -12,13 +12,13 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <>
-      {<NavigationContainer>
+      <NavigationContainer>
         <Stack.Navigator initialRouteName='Modules'>
           <Stack.Screen name="Modules" component={Modules}/>
           <Stack.Screen name="Levels" component={Levels}/>
           <Stack.Screen name="Exam" component={Testpage}/>
         </Stack.Navigator>
-      </NavigationContainer>}
+      </NavigationContainer>
     </>
   ) 
 };

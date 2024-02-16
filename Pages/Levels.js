@@ -12,13 +12,20 @@ import LevelLocked from "../components/LevelLocked";
 function Levels({navigation}) {
   const [cardLockedEnabled, setCardLockedEnabled] = useState(false);
   const [testEnabled, setTestEnabled] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const unlockCardLocked = () => {
     setCardLockedEnabled(true);
+    updateProgress();
   };
 
   const enableTest = () => {
     setTestEnabled(true);
+    updateProgress();
+  };
+
+  const updateProgress = () => {
+    setProgress(prevProgress => prevProgress + (100/3));
   };
 
   return (
@@ -27,10 +34,10 @@ function Levels({navigation}) {
         <Header icon= "reader-outline" heading="Reading"/>
         
         {/*Level 1*/}
-        <Level lno="1" progress={0.33} />        
+        <Level lno="1" progress={progress} />        
         <Card icon= "reader-outline" topic="Scanning" unlockFunction={unlockCardLocked}/>        
         <CardLocked icon= "reader-outline" topic = "Skimming" unlocked={cardLockedEnabled} onPress={enableTest}/>
-        <Test level="1" navigation={navigation} unlocked={testEnabled} />
+        <Test level="1" navigation={navigation} unlocked={testEnabled} updateProgress={updateProgress} />
         
         {/*Level 2*/}
         <LevelLocked lno="2" progress={0.03}/>

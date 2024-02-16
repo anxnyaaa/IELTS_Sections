@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Pressable, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-function Test({ level, navigation, unlocked}) {
+function Test({ level, navigation, unlocked, updateProgress }) {
   const lockTestAlert = () => {
     if (!unlocked) {
       Alert.alert('No Cheating!', 'You must complete the previous lectures.', [
@@ -18,6 +18,7 @@ function Test({ level, navigation, unlocked}) {
   const handleTestPress = () => {
     if (unlocked) {
       navigation.navigate("Exam", { navigation });
+      updateProgress();
     } else {
       lockTestAlert();
     }
@@ -59,7 +60,7 @@ function Test({ level, navigation, unlocked}) {
       </View>
 
       <Pressable 
-        style={({ pressed }) => [ styles.button,
+        style={({ pressed }) => [ [styles.button, {padding: 10}],
           unlocked ? styles.buttonUnlocked : styles.buttonLocked,
           pressed && unlocked && styles.buttonPressed,
         ]}
