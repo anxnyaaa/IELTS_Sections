@@ -3,6 +3,10 @@ import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 function Card({ icon, topic, unlockFunction }) {
+  const handleCardClick = () => {
+    unlockFunction(); 
+  };
+
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardContent}>
@@ -16,16 +20,22 @@ function Card({ icon, topic, unlockFunction }) {
           <Text style={styles.cardContentHeading}>{topic}</Text>
         </View>
         <View style={styles.cardContentParts}>
-          <Ionicons name="videocam-outline" size={16} color="gray" />
-          <Text>Video</Text>
+          <Ionicons name="musical-notes-outline" size={16} color="gray" />
+          <Text>Audio</Text>
         </View>
         <View style={styles.cardContentParts}>
           <Ionicons name="time-outline" size={16} color="gray" />
           <Text>50 Min</Text>
         </View>
       </View>
-      <Pressable style={styles.button} onPress={unlockFunction} android_ripple={{color: '#839efc'}}>
-        <Text style={styles.buttonText}>Watch Video</Text>
+      <Pressable 
+        style={styles.button}
+        onPress={handleCardClick}
+        android_ripple={{ color: '#839efc'}}
+      >
+        <View style={styles.buttonContent}>
+          <Text style={styles.buttonText}>Listen Audio</Text>
+        </View>
       </Pressable>
     </View>
   );
@@ -66,6 +76,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 6,
     borderRadius: 30,
+  },
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
   },
   buttonText: {
     color: "white",

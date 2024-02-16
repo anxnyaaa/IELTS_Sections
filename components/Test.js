@@ -2,8 +2,27 @@ import React from 'react';
 import { Text, View, StyleSheet, Pressable, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-function Test({ level, navigation }) {
-  
+function Test({ level, navigation, unlocked}) {
+  const lockTestAlert = () => {
+    if (!unlocked) {
+      Alert.alert('No Cheating!', 'You must complete the previous lectures.', [
+        {
+          text: 'Watch',
+          onPress: () => console.log('Watching Previous Lectures'),
+          style: 'destructive'
+        },
+      ]);
+    }
+  };
+
+  const handleTestPress = () => {
+    if (unlocked) {
+      navigation.navigate("Exam", { navigation });
+    } else {
+      lockTestAlert();
+    }
+  };
+
   return (    
     <View style={styles.cardAdvance}>
       <View style={styles.cardAdvanceContent}>
@@ -39,10 +58,16 @@ function Test({ level, navigation }) {
         </View>
       </View>
 
-      <Pressable style={[styles.button, { padding: 10 }]} onPress={() => { navigation.navigate("Exam", { navigation })}} android_ripple={{color: '#839efc'}}>
-        <View style={styles.testButton}>
+      <Pressable 
+        style={({ pressed }) => [ styles.button,
+          unlocked ? styles.buttonUnlocked : styles.buttonLocked,
+          pressed && unlocked && styles.buttonPressed,
+        ]}
+        onPress={handleTestPress} android_ripple={{ color: '#839efc'}}
+      >
+        <View style={styles.testButton}>   
           <Text style={{ color: "white", fontWeight: 500 }}>Take Test</Text>
-          <Ionicons name="lock-closed-outline" size={18} color="white" />
+          {!unlocked && <Ionicons name="lock-closed-outline" size={18} color="white" />}
         </View>
       </Pressable>
         
@@ -94,7 +119,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   button: {
-    opacity: .75,
     backgroundColor: "#1F41BB",
     color: "white",
     textAlign: "center",
@@ -106,6 +130,18 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontWeight: "500",
+  },
+  buttonLocked: {
+    opacity: .75,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonUnlocked: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 5,
   },
   testButton: {
     flexDirection: "row",

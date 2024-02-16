@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Pressable, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-function CardLocked({ icon, topic, unlocked }) {
+function CardLocked({ icon, topic, unlocked, onPress }) {
   const lockVideoAlert = () => {
     if (!unlocked) {
       Alert.alert('No Cheating!', 'You must complete the previous lectures.', [
@@ -24,33 +24,29 @@ function CardLocked({ icon, topic, unlocked }) {
             size={12}
             color="white"
             style={{
-              backgroundColor: "#1F41BB",
-              borderRadius: 50,
-              padding: 3,
-            }}
+              backgroundColor: "#1F41BB", borderRadius: 50, padding: 3 }}
           />
           <Text style={styles.cardContentHeading}>{topic}</Text>
         </View>
         <View style={styles.cardContentParts}>
-          <Ionicons name="videocam-outline" size={16} color="gray" />
-          <Text>Video</Text>
+          <Ionicons name="musical-notes-outline" size={16} color="gray" />
+          <Text>Audio</Text>
         </View>
         <View style={styles.cardContentParts}>
           <Ionicons name="time-outline" size={16} color="gray" />
           <Text>45 Min</Text>
         </View>
       </View>
-      <Pressable
-        style={({ pressed }) => [
-          styles.button,
+      <Pressable 
+        style={({ pressed }) => [ styles.button,
           unlocked ? styles.buttonUnlocked : styles.buttonLocked,
           pressed && unlocked && styles.buttonPressed,
         ]}
-        onPress={unlocked ? null : lockVideoAlert}
+        onPress={unlocked? onPress : lockVideoAlert}
         android_ripple={{ color: '#839efc'}}
       >
         <View style={styles.buttonContent}>
-          <Text style={styles.buttonText}>Watch Video</Text>
+          <Text style={styles.buttonText}>Listen Audio</Text>
           {!unlocked && <Ionicons name="lock-closed-outline" size={18} color="white" />}
         </View>
       </Pressable>
@@ -59,7 +55,6 @@ function CardLocked({ icon, topic, unlocked }) {
 }
 
 export default CardLocked;
-
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -95,25 +90,19 @@ const styles = StyleSheet.create({
     padding: 6,
     borderRadius: 30,
   },
-  buttonLocked: {
-    opacity: .75,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
   buttonContent: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5,
   },
-  buttonUnlocked: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 5,
-  },
   buttonText: {
     color: "white",
     fontWeight: "500",
+  },
+  buttonLocked: {
+    opacity: .75,
+  },
+  buttonPressed: {
+    opacity: 0.6,
   },
 });

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView, Alert } from "react-native";
 
 import Header from "../components/Header";
 import Level from "../components/Level";
@@ -10,15 +10,15 @@ import CardLocked from "../components/CardLocked";
 import LevelLocked from "../components/LevelLocked";
 
 function Levels({navigation}) {
-  const [unlocked, setUnlocked] = useState(false);
-  const [timerStarted, setTimerStarted] = useState(false);
+  const [cardLockedEnabled, setCardLockedEnabled] = useState(false);
+  const [testEnabled, setTestEnabled] = useState(false);
 
-  const unlockFunction = () => {
-    setUnlocked(true);
+  const unlockCardLocked = () => {
+    setCardLockedEnabled(true);
   };
 
-  const handleStart = () => {
-    setTimerStarted(true);
+  const enableTest = () => {
+    setTestEnabled(true);
   };
 
   return (
@@ -28,17 +28,16 @@ function Levels({navigation}) {
         
         {/*Level 1*/}
         <Level lno="1" progress={0.33} />        
-        <Card icon= "reader-outline" topic="Scanning" unlockFunction={unlockFunction}/>
-        <CardLocked icon= "reader-outline" topic = "Skimming" unlocked={unlocked}/>
+        <Card icon= "reader-outline" topic="Scanning" unlockFunction={unlockCardLocked}/>        
+        <CardLocked icon= "reader-outline" topic = "Skimming" unlocked={cardLockedEnabled} onPress={enableTest}/>
+        <Test level="1" navigation={navigation} unlocked={testEnabled} />
         
-        <Test level="1" navigation={navigation} handleStart={handleStart} />
-
         {/*Level 2*/}
         <LevelLocked lno="2" progress={0.03}/>
         <CardLocked icon= "reader-outline" topic="In-Notation"/>
         <StatusBar style="auto" />
 
-        <Test level="2" navigation={navigation} handleStart={handleStart}/>     
+        <Test level="2" navigation={navigation} handleStart={enableTest}/>     
 
       </ScrollView>
     </View>
