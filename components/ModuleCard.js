@@ -5,11 +5,13 @@ import { Ionicons } from "@expo/vector-icons";
 function ModuleCard({name, icon}) {
     return (
         <View style={styles.moduleContainer}>
-
-          <View style={styles.moduleCardContentParts}>
-            <Ionicons name={icon} size={20} color="white" style={{ backgroundColor: "#1F41BB", borderRadius: 50, padding: 5 }}/>
-            <Text style={styles.moduleCardContentHeading}>{name}</Text>
-            <Ionicons name="open-outline" size={26} color="black"/>
+          <View style={styles.moduleCardContentHead}>
+            <View style={styles.moduleCardContentParts}>
+              <Ionicons name={icon} size={20} color="white" style={{ backgroundColor: "#1F41BB", borderRadius: 50, padding: 5 }}/>
+              <Text style={styles.moduleCardContentHeading}>{name}</Text>
+              <Ionicons name="open-outline" size={26} color="black"/>
+            </View>
+            {/*<Ionicons name="lock-closed-outline" size={22} color="#001AA1" />*/}
           </View>
 
           <View style={styles.line}></View>
@@ -42,6 +44,11 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     borderRadius: 10,
     elevation: 4,
+  },
+  moduleCardContentHead: {
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   moduleCardContentParts: {
     flexDirection: "row",

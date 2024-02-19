@@ -6,13 +6,13 @@ import ModuleCard from '../components/ModuleCard';
 
 function Modules({ navigation }) {
   const handleNavigateToLevels = () => {
-    navigation.navigate('Levels');
+    navigation.navigate('Module 1');
   };
 
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Header icon= "cube-outline" heading="Modules"  />
+        <Header heading="Modules"  />
         <View style={styles.moduleCardContainer}>
           <Pressable onPress={handleNavigateToLevels}>
             <ModuleCard navigation={navigation} name="Reading" icon="reader-outline" />

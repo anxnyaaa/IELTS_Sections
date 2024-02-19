@@ -3,13 +3,11 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, ScrollView, Alert } from "react-native";
 
 import Header from "../components/Header";
-import Level from "../components/Level";
-import Card from "../components/Card";
+import Progress from "../components/Progress"
 import Test from "../components/Test";
-import CardLocked from "../components/CardLocked";
-import LevelLocked from "../components/LevelLocked";
+import ButtonBordered from '../components/ButtonBordered';
 
-function Levels({navigation}) {
+function Levels({navigation, name}) {
   const [cardLockedEnabled, setCardLockedEnabled] = useState(false);
   const [testEnabled, setTestEnabled] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -32,20 +30,18 @@ function Levels({navigation}) {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header icon= "reader-outline" heading="Reading"/>
-        
-        {/*Level 1*/}
-        <Level lno="1" progress={progress} />        
-        <Card icon= "reader-outline" topic="Scanning" unlockFunction={unlockCardLocked}/>        
-        <CardLocked icon= "reader-outline" topic = "Skimming" unlocked={cardLockedEnabled} onPress={enableTest}/>
-        <Test level="1" navigation={navigation} unlocked={testEnabled} updateProgress={updateProgress} />
+        <Progress /> 
+        <ButtonBordered name = 'View Module Analytics'/>  
+
+        <View style={styles.line}></View>
+
+        {/*Level 1*/}        
+        <Test level="1" navigation={navigation} /*unlocked={testEnabled} updateProgress={updateProgress}*/ />
         
         {/*Level 2*/}
-        <LevelLocked lno="2" progress={0.03}/>
-        <CardLocked icon= "reader-outline" topic="In-Notation"/>
-        <StatusBar style="auto" />
+        <Test level="2" navigation={navigation} /*handleStart={enableTest}*//>        
 
-        <Test level="2" navigation={navigation} handleStart={enableTest}/>     
-
+        <StatusBar style="auto" />        
       </ScrollView>
     </View>
   );
@@ -60,5 +56,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
     paddingTop: 20,
-  }
+  },
+  line: {
+    marginVertical: 10,
+    height: 1,
+    width: '100%',
+    backgroundColor: '#0e0e0e',
+  },
 });

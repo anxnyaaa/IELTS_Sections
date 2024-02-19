@@ -4,23 +4,30 @@ import { StyleSheet, View, Text, ScrollView, Pressable} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import Stopclock from '../timer/Stopclock';
-import Button from '../components/Button';
 import Examtest from "../exam/Examtest"
+import Questions from '../exam/Questions';
 
 function Testpage({navigation}) {
   
   const handleTimerEnd = () => {
-    navigation.navigate('Levels'); // Navigate to "Levels" screen
+    navigation.navigate('Module 1'); // Navigate to "Module 1" screen
   };
 
   return (
-    <View style={styles.testContainer}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+    <View style={styles.testContainer}>     
+        <ScrollView showsVerticalScrollIndicator={false}> 
         <View style={styles.first}>
-            <Button name="Submit"/>               
+          <Text style={styles.heading}>Questions</Text>
+          <View style={[styles.heading, {gap: 15}]}>
+            <View style={styles.iconContainer}>
+              <Pressable android_ripple={{color: '#839efc'}}>
+                <Ionicons name="eye-outline" size={22} color="#1F41BB" />
+              </Pressable>
+            </View>
             <Stopclock onTimerEnd={handleTimerEnd} />
-                           
+          </View>                     
         </View>
+        <Questions/>
         <View style= {styles.tab}>
           <View style={styles.tabRow}>
             <Pressable style= {styles.qsNo} name={1}/>
@@ -42,12 +49,13 @@ function Testpage({navigation}) {
           <Text>A word or law no longer in use ?  </Text>
         </View>*/}
         <Examtest/>
-        <View style={styles.footer}>
-          <View style={styles.left}>
-            <Button name='Previous'/>
-            <Button name='Mark for Review'/>
-          </View>
-          <Button name='Next'/>
+        <View style={styles.footer}>          
+          <Pressable style={[styles.button, {borderWidth: 2, paddingHorizontal: '15%', paddingVertical: '2%'}]} android_ripple={{color: '#839efc'}}>
+            <Text style={styles.buttonText}>Clear</Text>
+          </Pressable>
+          <Pressable style={[styles.button, {backgroundColor: "#1F41BB"}]} android_ripple={{color: '#839efc'}}>
+            <Text style={[styles.buttonText, {color: 'white'}]}>Submit</Text>
+          </Pressable>
         </View>
         <StatusBar style="auto" />         
       </ScrollView>
@@ -69,11 +77,44 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   }, 
+  heading: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#1F41BB",
+    fontSize: 28,
+    fontWeight: "900",
+  },
+  iconContainer: {
+    backgroundColor: '#ffffff',
+    width: 36,
+    height: 36,
+    padding: 5,
+    borderColor: '#1F41BB',
+    borderRadius: 10,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }, 
   footer: {
     marginTop: 10,
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     gap: 10,
+  },
+  button: {
+    borderColor: "#1F41BB",
+    paddingVertical: "2%",
+    paddingHorizontal: "15%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 8,
+    borderRadius: 50, 
+  },
+  buttonText: {
+    color: "#1f41bb",
+    fontWeight: "500",
+    fontSize: 18
   },
   left: {
     flexDirection: 'row',

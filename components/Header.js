@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-function Heading({ icon, heading }) {
+function Heading({ heading }) {
   return (
     <View style={styles.header}>
       <View style={styles.iconContainer}>
@@ -9,19 +9,9 @@ function Heading({ icon, heading }) {
           <Ionicons name="menu-outline" size={24} color="#0e0e0e" />
         </Pressable>
       </View>
-      <View style={styles.heading}>
-        <Ionicons
-          name={icon}
-          size={24}
-          color="#1F41BB"
-          //style={{ backgroundColor: "#1F41BB", borderRadius: 50, padding: 3 }}
-        />
-        <Text style={styles.headingText}>{heading}</Text>
-      </View>
+      <Text style={styles.heading}>{heading}</Text>
       <View style={styles.iconContainer}>
-        <Pressable android_ripple={{color: '#839efc'}}>
-          <Ionicons name="log-out-outline" size={24} color="#0e0e0e" />
-        </Pressable>
+        <Pressable android_ripple={{color: '#839efc'}}><Ionicons name="log-out-outline" size={24} color="#0e0e0e" /></Pressable>
       </View>
     </View>  
     
@@ -51,9 +41,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    gap: 10,
-  },
-  headingText: {
     color: "#1F41BB",
     fontSize: 28,
     fontWeight: "900",

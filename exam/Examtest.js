@@ -9,7 +9,7 @@ const Quiz = () => {
 	const [quizCompleted, setQuizCompleted] = useState(false);
 	const [timeLeft, setTimeLeft] = useState(10);
 
-	useEffect(() => {
+	/*useEffect(() => {
 		const timer = setTimeout(() => {
 			if (timeLeft > 0) {
 				setTimeLeft(timeLeft - 1);
@@ -24,7 +24,7 @@ const Quiz = () => {
 		}, 1000);
 
 		return () => clearTimeout(timer);
-	}, [currentQuestion, timeLeft]);
+	}, [currentQuestion, timeLeft]);*/
 
 	const handleAnswer = (selectedOption) => {
 		if (selectedOption ===
@@ -84,24 +84,15 @@ const Quiz = () => {
 				</View>
 			) : (
 				<View>
-					<Text style={styles.question}>
-						{Examdata[currentQuestion].question}
-					</Text>
-					<Text style={styles.timer}>
+					<Text style={styles.question}>{Examdata[currentQuestion].question}</Text>
+					{/* {<Text style={styles.timer}>
 						Time Left: {timeLeft} sec
-					</Text>
-					{Examdata[currentQuestion]
-						.options.map((option, index) => (
-							<TouchableOpacity
-								key={index}
-								style={styles.option}
-								onPress={() => handleAnswer(option)}
-							>
-								<Text style={styles.buttonText}>
-									{option}
-								</Text>
-							</TouchableOpacity>
-						))}
+					</Text>} */}
+					{Examdata[currentQuestion].options.map((option, index) => (
+						<TouchableOpacity key={index} style={styles.option} onPress={() => handleAnswer(option)}>
+							<Text style={styles.buttonText}>{option}</Text>
+						</TouchableOpacity>
+					))}
 				</View>
 			)}
 		</View>
@@ -113,18 +104,31 @@ export default Quiz;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: 'center',
+		alignItems: 'stretch',
+		width: '100%',
 	},
 	question: {
+		backgroundColor: 'white',
+		borderColor: '#E8ECF4',
+		borderWidth: 2,
+		borderRadius: 10,
+		padding: 15,
+		marginBottom: 20,
+		alignItems: 'baseline',
+		justifyContent: 'flex-start',
+		color: '#1F41BB',
 		fontSize: 18,
 		fontWeight: 'bold',
-		marginBottom: 20,
 	},
 	option: {
-		backgroundColor: '#DDDDDD',
+		backgroundColor: 'white',
+		borderColor: '#E8ECF4',
+		borderWidth: 2,
+		borderRadius: 10,
 		padding: 10,
+		paddingHorizontal: 15,
 		marginBottom: 10,
-		alignItems: 'center',
+		alignItems: 'flex-start',
 	},
 	buttonText: {
 		fontSize: 16,
@@ -139,15 +143,6 @@ const styles = StyleSheet.create({
 		backgroundColor: 'blue',
 		padding: 10,
 		alignItems: 'center',
-	},
-	timer: {
-		fontSize: 11,
-		fontWeight: 'bold',
-		backgroundColor: 'yellow',
-		paddingVertical: 11,
-		marginRight: 120,
-		borderRadius: 12,
-
 	},
 	correctAnswer: {
 		color: 'green',
