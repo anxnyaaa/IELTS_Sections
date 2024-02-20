@@ -1,36 +1,49 @@
 import React from 'react';
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-function ModuleCard({name, icon}) {
-    return (
-        <View style={styles.moduleContainer}>
-          <View style={styles.moduleCardContentHead}>
-            <View style={styles.moduleCardContentParts}>
-              <Ionicons name={icon} size={20} color="white" style={{ backgroundColor: "#1F41BB", borderRadius: 50, padding: 5 }}/>
-              <Text style={styles.moduleCardContentHeading}>{name}</Text>
-              <Ionicons name="open-outline" size={26} color="black"/>
-            </View>
-            {/*<Ionicons name="lock-closed-outline" size={22} color="#001AA1" />*/}
-          </View>
+function ModuleCard({ name, icon, isLocked, onPress }) {
+  const handlePress = () => {
+    if (isLocked) {
+      Alert.alert('No Cheating!', 'You must complete the previous module to unlock this one.',[
+      {
+          text: 'Watch',
+          onPress: () => console.log('Watching Previous Lectures'),
+          style: 'destructive'
+      }]);
+    } else {
+      onPress();
+    }
+  };
 
-          <View style={styles.line}></View>
-
-          <View style={styles.moduleContent}>
-            <View style={styles.moduleCardContentParts}>
-              <Pressable style={styles.button} android_ripple={{color: '#839efc'}}>
-                <Text style={styles.buttonText}>Number of Tests</Text>
-              </Pressable>
-            </View>
-            <View style={styles.moduleCardContentParts}>
-              <Pressable style={styles.button} android_ripple={{color: '#839efc'}}>
-                <Text style={styles.buttonText}>Number of Levels</Text>
-              </Pressable>
-            </View>
-          </View>
-
+  return (
+    <View style={[styles.moduleContainer, isLocked && styles.lockedModule]}>
+      <View style={styles.moduleCardContentHead}>
+        <View style={styles.moduleCardContentParts}>
+          <Ionicons name={icon} size={20} color="white" style={{ backgroundColor: "#1F41BB", borderRadius: 50, padding: 5 }}/>
+          <Text style={styles.moduleCardContentHeading}>{name}</Text>
+          <Ionicons name="open-outline" size={26} color="black"/>
         </View>
-    );
+        {isLocked && <Ionicons name="lock-closed-outline" size={22} color="#001AA1" />}
+      </View>
+
+      <View style={styles.line}></View>
+
+      <View style={styles.moduleContent}>
+        <View style={styles.moduleCardContentParts}>
+          <Pressable style={styles.button} android_ripple={{color: '#839efc'}} onPress={handlePress}>
+            <Text style={styles.buttonText}>Number of Tests</Text>
+          </Pressable>
+        </View>
+        <View style={styles.moduleCardContentParts}>
+          <Pressable style={styles.button} android_ripple={{color: '#839efc'}} onPress={handlePress}>
+            <Text style={styles.buttonText}>Number of Levels</Text>
+          </Pressable>
+        </View>
+      </View>
+
+    </View>
+  );
 } 
 
 export default ModuleCard;
@@ -44,6 +57,9 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     borderRadius: 10,
     elevation: 4,
+  },
+  lockedModule: {
+    opacity: 0.75,
   },
   moduleCardContentHead: {
     flexDirection: "row",
