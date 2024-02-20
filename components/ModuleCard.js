@@ -31,7 +31,7 @@ function ModuleCard({name, icon}) {
 
         </View>
     );
-}
+} 
 
 export default ModuleCard;
 

@@ -1,45 +1,33 @@
 import React, { useState } from 'react';
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, ScrollView, Alert } from "react-native";
+import { StyleSheet, View, ScrollView, Alert, Pressable, Text } from "react-native";
 
 import Header from "../components/Header";
 import Progress from "../components/Progress"
 import Test from "../components/Test";
 import ButtonBordered from '../components/ButtonBordered';
 
-function Levels({navigation, name}) {
-  const [cardLockedEnabled, setCardLockedEnabled] = useState(false);
-  const [testEnabled, setTestEnabled] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  const unlockCardLocked = () => {
-    setCardLockedEnabled(true);
-    updateProgress();
-  };
-
-  const enableTest = () => {
-    setTestEnabled(true);
-    updateProgress();
-  };
-
-  const updateProgress = () => {
-    setProgress(prevProgress => prevProgress + (100/3));
-  };
+function Module({ navigation }) {
 
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header icon= "reader-outline" heading="Reading"/>
-        <Progress /> 
-        <ButtonBordered name = 'View Module Analytics'/>  
+        <Progress/>
+        {/*<Pressable onPress={() => { navigation.navigate("Analytics")}}>
+          <ButtonBordered navigation={navigation} name='View Module Analytics'></ButtonBordered>
+        </Pressable>*/}
+        <Pressable style={styles.button} onPress={() => { navigation.navigate("Module Analytics")}} android_ripple={{color: '#839efc'}}>
+          <Text style={styles.buttonText}>View Module Analytics</Text>
+        </Pressable>
 
         <View style={styles.line}></View>
 
         {/*Level 1*/}        
-        <Test level="1" navigation={navigation} /*unlocked={testEnabled} updateProgress={updateProgress}*/ />
+        <Test level="1" navigation={navigation}/>{/*unlocked={testEnabled} updateProgress={updateProgress}*/}
         
         {/*Level 2*/}
-        <Test level="2" navigation={navigation} /*handleStart={enableTest}*//>        
+        <Test level="2" navigation={navigation} /*handleStart={enableTest}*//>  
 
         <StatusBar style="auto" />        
       </ScrollView>
@@ -47,7 +35,7 @@ function Levels({navigation, name}) {
   );
 }
 
-export default Levels;
+export default Module;
 
 const styles = StyleSheet.create({
   container: {
@@ -62,5 +50,20 @@ const styles = StyleSheet.create({
     height: 1,
     width: '100%',
     backgroundColor: '#0e0e0e',
+  },
+  button: {
+    borderColor: "#1F41BB",
+    paddingVertical: "2.5%",
+    paddingHorizontal: "8%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    borderWidth: 2,
+    marginVertical: 8,
+  },
+  buttonText: {
+    color: "#1f41bb",
+    fontWeight: "500",
+    fontSize: 18
   },
 });
