@@ -5,7 +5,6 @@ import { StyleSheet, View, ScrollView, Alert, Pressable, Text } from "react-nati
 import Header from "../components/Header";
 import Progress from "../components/Progress"
 import Test from "../components/Test";
-import ButtonBordered from '../components/ButtonBordered';
 
 function Module({ navigation }) {
 
@@ -14,9 +13,6 @@ function Module({ navigation }) {
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header icon= "reader-outline" heading="Reading"/>
         <Progress/>
-        {/*<Pressable onPress={() => { navigation.navigate("Analytics")}}>
-          <ButtonBordered navigation={navigation} name='View Module Analytics'></ButtonBordered>
-        </Pressable>*/}
         <Pressable style={styles.button} onPress={() => { navigation.navigate("Module Analytics")}} android_ripple={{color: '#839efc'}}>
           <Text style={styles.buttonText}>View Module Analytics</Text>
         </Pressable>
