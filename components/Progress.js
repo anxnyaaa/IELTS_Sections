@@ -4,9 +4,9 @@ import * as Progress from "react-native-progress";
 function Level({ progress }) {
   return (
     <View style={styles.level}>
-        <Text style={styles.levelText}>{/*{progress.toFixed(2)}*/}0% completed</Text>
+        <Text style={styles.levelText}>{/*{progress.toFixed(2)}*/}50% completed</Text>
         {/*<Progress.Bar progress={progress / 100} width={340} color="#385682" />*/}
-        <Progress.Bar progress='0' width={370} color="#385682" />        
+        <Progress.Bar progress={0.5} width={370} color="#385682" />        
     </View>
 
   );
