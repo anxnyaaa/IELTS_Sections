@@ -1,38 +1,109 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert } from 'react-native';
 import { Examdata } from './Examdata';
 
-const Quiz = () => {
+const data = [
+  { key: '1', title: '1' },
+  { key: '2', title: '2' },
+  { key: '3', title: '3' },
+  { key: '4', title: '4' },
+  { key: '5', title: '5' },
+  { key: '6', title: '6' },
+  { key: '7', title: '7' },
+  { key: '8', title: '8' },
+  { key: '9', title: '9' },
+  { key: '10', title: '10' },
+];
+
+const renderItem = ({ item, index, onPress, isSelected }) => (
+  <TouchableOpacity onPress={() => onPress(index)} style={[styles.item, isSelected ? styles.selectedItem : null]}>
+    <Text style={styles.title}>{item.title}</Text>
+  </TouchableOpacity>
+);
+
+const keyExtractor = (item) => item.key;
+
+const Quiz = ({ navigation }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [score, setScore] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState(Array(Examdata.length).fill(null));
   const [quizCompleted, setQuizCompleted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [lastQuestion, setLastQuestion] = useState(false);
+  const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer(prevTimer => prevTimer + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (currentQuestion === Examdata.length - 1) {
+      setLastQuestion(true);
+    } else {
+      setLastQuestion(false);
+    }
+  }, [currentQuestion]);
+
+  const [stopTimer, setStopTimer] = useState(false);
 
   const handleAnswer = () => {
-    if (selectedOption === Examdata[currentQuestion].correctAnswer) {
-      setScore(score + 1);
-    }
-
-    if (currentQuestion < Examdata.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-      setSelectedOption(null); // Reset selected option for the next question
-      setTimeLeft(10);
-    } else {
+    //console.log('Handle answer called');
+    setStopTimer(true)
+    if (lastQuestion) {
+      //console.log('Last question reached');
+      let newScore = 0;
+      ;
+      selectedOptions.forEach((selectedOption, index) => {
+        if (selectedOption === Examdata[index].correctAnswer) {
+          newScore++;
+        }
+      });
       setQuizCompleted(true);
+      const percentage = (newScore / Examdata.length) * 100;
+      clearInterval(timer); // Stop the timer
+      Alert.alert('Quiz Result', `Your score: ${percentage.toFixed(2)}%`, [
+        {
+          text: 'OK',
+          onPress: () => {
+            // Navigate to Module.js page after displaying the result
+            navigation.navigate('Module 1');
+          },
+        },
+      ]);
+    } else {
+      setCurrentQuestion(currentQuestion + 1);
     }
   };
-
+   
+  
   const handleOptionSelect = (option) => {
-    setSelectedOption(option);
+    const updatedSelectedOptions = [...selectedOptions];
+    updatedSelectedOptions[currentQuestion] = option;
+    setSelectedOptions(updatedSelectedOptions);
   };
+
+  const handleQuestionSelect = (index) => {
+    setCurrentQuestion(index);
+  };
+  
 
   return (
     <View style={styles.container}>
+      <View style={styles.number}>
+        <FlatList
+          data={data}
+          renderItem={({ item, index }) => renderItem({ item, index, onPress: handleQuestionSelect, isSelected: index === currentQuestion })}
+          keyExtractor={keyExtractor}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+
       {quizCompleted ? (
         <View>
-          <Text style={styles.score}>Your Score: {score}</Text>
+          <Text style={styles.score}>Quiz Completed</Text>
         </View>
       ) : (
         <View>
@@ -44,18 +115,25 @@ const Quiz = () => {
               key={index}
               style={[
                 styles.option,
-                selectedOption === option && styles.selectedOption,
+                selectedOptions[currentQuestion] === option && styles.selectedOption,
               ]}
               onPress={() => handleOptionSelect(option)}>
               <Text style={styles.buttonText}>{option}</Text>
             </TouchableOpacity>
           ))}
-          <TouchableOpacity
-            style={styles.submitButton}
-            onPress={handleAnswer}
-            disabled={!selectedOption}>
-            <Text style={styles.buttonText}>Submit Answer</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[styles.button, styles.clearButton]}
+              onPress={() => handleOptionSelect(null)}>
+              <Text style={[styles.buttonText, styles.clearButtonText]}>Clear</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, styles.submitButton, lastQuestion ? null : styles.disabledButton]}
+              onPress={handleAnswer}
+              disabled={!lastQuestion}>
+              <Text style={styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )}
     </View>
@@ -69,6 +147,30 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     width: '100%',
+  },
+  number: {
+    flex: 1,
+    paddingVertical: 25
+  },
+  item: {
+    marginVertical: 5,
+    marginHorizontal: 10,
+    backgroundColor: '#ffffff',
+    width: 40,
+    height: 40,
+    padding: 5,
+    borderColor: '#E8ECF4',
+    borderRadius: 10,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  selectedItem: {
+    backgroundColor: '#1F41BB', // Highlight color for selected number
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '800',
   },
   question: {
     backgroundColor: 'white',
@@ -101,16 +203,34 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black', // Adjust text color for better visibility
   },
+  clearButtonText: {
+    color: '#1F41BB', // Blue color for clear button text
+  },
   score: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 20,
   },
-  submitButton: {
-    backgroundColor: '#1F41BB',
-    borderRadius: 10,
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  button: {
+    borderRadius: 50,
     padding: 10,
     alignItems: 'center',
-    marginTop: 20,
+    width: '48%',
+  },
+  clearButton: {
+    backgroundColor: 'transparent',
+    borderColor: '#1F41BB',
+    borderWidth: 2,
+  },
+  submitButton: {
+    backgroundColor: '#1F41BB',
+  },
+  disabledButton: {
+    opacity: 0.75, // Reduce opacity by 25% when disabled
   },
 });

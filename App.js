@@ -18,7 +18,8 @@ export default function App() {
           <Stack.Screen name="Modules" component={AllModules}/>
           <Stack.Screen name="Module 1" component={Module}/>
           <Stack.Screen name="Module Analytics" component={Analytics}/>
-          <Stack.Screen name="Test" component={Testpage}/>          
+          <Stack.Screen name="Test" component={Testpage}/>
+                    
         </Stack.Navigator>
       </NavigationContainer>
     </>

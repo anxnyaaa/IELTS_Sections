@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 import Time from './Time';
 
-export default function StopClock({ onTimerEnd }) {
+export default function StopClock({ onTimerEnd, stopTimer }) {
   const initialTime = 2 * 60 * 1000; // 2m in milliseconds
   const [time, setTime] = useState(initialTime);
   const [status, setStatus] = useState(1); // -1 => stopped, 1 => playing
@@ -16,12 +16,10 @@ export default function StopClock({ onTimerEnd }) {
         setTime((prevTime) => {
           if (prevTime <= 0) {
             clearInterval(timerID);
-            setStatus(-1);            
+            setStatus(-1);
             onTimerEnd();
             return 0;
-          } 
-          
-          else if (prevTime <= 20000 && !showAlertRef.current) {
+          } else if (prevTime <= 20000 && !showAlertRef.current) {
             showAlertRef.current = true;
             showAlert();
           }
@@ -34,8 +32,15 @@ export default function StopClock({ onTimerEnd }) {
     return () => {
       clearInterval(timerID);
     };
-  }, [status]);
+  }, [status, stopTimer]); // Add stopTimer to dependencies
 
+  useEffect(() => {
+    // Stop the timer when stopTimer is true
+    if (stopTimer) {
+      clearInterval(timerID);
+      setStatus(-1);
+    }
+  }, [stopTimer]);
 
   const showAlert = () => {
     Alert.alert('Warning!', 'Last 20 seconds left!');
@@ -43,7 +48,7 @@ export default function StopClock({ onTimerEnd }) {
 
   return (
     <View style={styles.container}>
-      <Time time={time} />      
+      <Time time={time} />
     </View>
   );
 }
