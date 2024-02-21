@@ -2,10 +2,10 @@ import React from 'react';
 import { Text, View, StyleSheet, Pressable, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-function Test({ level, navigation, unlocked}) {
+function Test({ level, navigation, enabled, updateResult, firstTestResult }) {
   const lockTestAlert = () => {
-    if (!unlocked) {
-      Alert.alert('No Cheating!', 'You must complete the previous lectures.', [
+    if (!enabled) {
+      Alert.alert('No Cheating!', 'You must complete the previous level.', [
         {
           text: 'Watch',
           onPress: () => console.log('Watching Previous Lectures'),
@@ -16,19 +16,20 @@ function Test({ level, navigation, unlocked}) {
   };
 
   const handleTestPress = () => {
-    /*if (unlocked) {*/
+    if (enabled) {
       navigation.navigate("Test", { navigation });
-      /*updateProgress();
+      //updateProgress();
     } else {
       lockTestAlert();
-    }*/
+    }
   };
 
   return (
     <View style={styles.test}>
-      <View style={[styles.level, styles.levelLocked]}>
+      <View style={[styles.level, !enabled && styles.levelLocked]}>
         <Text style={styles.levelHeading}>Level {level}</Text>
-        {/*!unlocked && <Ionicons name="lock-closed-outline" size={22} color="#001AA1" />*/}
+        {/* Check if the firstTestResult is less than 70 or not available, then show the lock icon */}
+        {!enabled && (!firstTestResult || firstTestResult < 70) && <Ionicons name="lock-closed-outline" size={22} color="#001AA1" />}
       </View>
       <View style={styles.cardAdvance}>
         <View style={styles.cardAdvanceContent}>
@@ -47,9 +48,10 @@ function Test({ level, navigation, unlocked}) {
               <View style={styles.cardAdvanceContentHeadingText}>
                 <Text style={styles.cardAdvanceContentHeadingTextHead}>Level {level}</Text>
                 <Text style={styles.cardAdvanceContentHeadingTextBody}>ASSESSMENT</Text>
-              </View>              
+              </View>
             </View>
-            {/*!unlocked && <Ionicons name="lock-closed-outline" size={22} color="#001AA1" />*/}            
+            {/* Check if the firstTestResult is less than 70 or not available, then show the lock icon */}
+            {!enabled && (!firstTestResult || firstTestResult < 70) && <Ionicons name="lock-closed-outline" size={22} color="#001AA1" />}
           </View>
           <View style={styles.cardAdvanceActivity}>
             <View style={styles.cardContentParts}>
@@ -61,28 +63,27 @@ function Test({ level, navigation, unlocked}) {
               <Text>40 Mins</Text>
             </View>
           </View>
-      </View>
-
-      <Pressable 
-        /*style={({ pressed }) => [ [styles.button, {padding: 10}],
-          unlocked ? styles.buttonUnlocked : styles.buttonLocked,
-          pressed && unlocked && styles.buttonPressed,
-        ]}*/
-        style={[styles.button, {padding: 10}]}
-        onPress={handleTestPress} android_ripple={{ color: '#839efc'}}
-      >
-        <View style={styles.testButton}>   
-          <Text style={{ color: "white", fontWeight: 500 }}>Take Test</Text>
-          {/*!unlocked && <Ionicons name="lock-closed-outline" size={18} color="white" />*/}
         </View>
-      </Pressable>
-        
-    </View>
+
+        <Pressable
+          style={[styles.button, { padding: 10 }]}
+          onPress={handleTestPress}
+          android_ripple={{ color: '#839efc' }}
+        >
+          <View style={styles.testButton}>
+            <Text style={{ color: "white", fontWeight: 500 }}>Take Test</Text>
+            {/* Check if the firstTestResult is less than 70 or not available, then show the lock icon */}
+            {!enabled && (!firstTestResult || firstTestResult < 70) && <Ionicons name="lock-closed-outline" size={18} color="white" />}
+          </View>
+        </Pressable>
+
+      </View>
     </View>
   );
 }
 
 export default Test;
+
 
 const styles = StyleSheet.create({
   test: {

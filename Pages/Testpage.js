@@ -1,5 +1,3 @@
-// Testpage.js
-
 import React from 'react';
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Text, ScrollView, Pressable} from "react-native";
@@ -8,10 +6,10 @@ import { Ionicons } from "@expo/vector-icons";
 import Stopclock from '../timer/Stopclock';
 import Examtest from "../exam/Examtest"
 
-function Testpage(props) { // Receive props
+function Testpage(props) {
 
   const handleTimerEnd = () => {
-    props.navigation.navigate('Module 1'); // Navigate to "Module 1" screen
+    props.navigation.navigate('Module 1');
   };
 
   return (
@@ -25,10 +23,7 @@ function Testpage(props) { // Receive props
                 <Ionicons name="eye-outline" size={22} color="#1F41BB" />
               </Pressable>
             </View>
-            {/* Pass navigation prop to Stopclock component */}
             <Stopclock onTimerEnd={handleTimerEnd} navigation={props.navigation} />
-            
-
           </View>                     
         </View>
         <Examtest navigation={props.navigation}/>
@@ -40,6 +35,7 @@ function Testpage(props) { // Receive props
 }
 
 export default Testpage;
+
 
 const styles = StyleSheet.create({
   testContainer: {

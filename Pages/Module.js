@@ -1,12 +1,18 @@
+// Import useState from React
 import React, { useState } from 'react';
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, ScrollView, Alert, Pressable, Text } from "react-native";
+import { StyleSheet, View, ScrollView, Pressable, Text } from "react-native";
 
 import Header from "../components/Header";
-import Progress from "../components/Progress"
+import Progress from "../components/Progress";
 import Test from "../components/Test";
 
 function Module({ navigation }) {
+  const [firstTestResult, setFirstTestResult] = useState(null);
+
+  const updateFirstTestResult = (result) => {
+    setFirstTestResult(result);
+  };
 
   return (
     <View style={styles.container}>
@@ -19,11 +25,12 @@ function Module({ navigation }) {
 
         <View style={styles.line}></View>
 
-        {/*Level 1*/}        
-        <Test level="1" navigation={navigation}/>{/*unlocked={testEnabled} updateProgress={updateProgress}*/}
-        
-        {/*Level 2*/}
-        <Test level="2" navigation={navigation} /*handleStart={enableTest}*//>  
+        {/* Level 1 */}
+        <Test level="1" navigation={navigation} enabled={true} updateResult={updateFirstTestResult} />
+
+        {/* Level 2 */}
+        {/* Pass firstTestResult as a prop */}
+        <Test level="2" navigation={navigation} enabled={firstTestResult >= 70} firstTestResult={firstTestResult} />
 
         <StatusBar style="auto" />        
       </ScrollView>
