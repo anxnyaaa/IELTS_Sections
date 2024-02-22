@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Pressable, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-function Test({ level, navigation, enabled, updateResult, firstTestResult }) {
+function Test({ level, navigation, enabled, firstTestResult }) {
   const lockTestAlert = () => {
     if (!enabled) {
       Alert.alert('No Cheating!', 'You must complete the previous level.', [
@@ -17,8 +17,7 @@ function Test({ level, navigation, enabled, updateResult, firstTestResult }) {
 
   const handleTestPress = () => {
     if (enabled) {
-      navigation.navigate("Test", { navigation });
-      //updateProgress();
+      navigation.navigate("Test", { level }); // Navigate to the test page
     } else {
       lockTestAlert();
     }
@@ -28,7 +27,6 @@ function Test({ level, navigation, enabled, updateResult, firstTestResult }) {
     <View style={styles.test}>
       <View style={[styles.level, !enabled && styles.levelLocked]}>
         <Text style={styles.levelHeading}>Level {level}</Text>
-        {/* Check if the firstTestResult is less than 70 or not available, then show the lock icon */}
         {!enabled && (!firstTestResult || firstTestResult < 70) && <Ionicons name="lock-closed-outline" size={22} color="#001AA1" />}
       </View>
       <View style={styles.cardAdvance}>
@@ -50,7 +48,6 @@ function Test({ level, navigation, enabled, updateResult, firstTestResult }) {
                 <Text style={styles.cardAdvanceContentHeadingTextBody}>ASSESSMENT</Text>
               </View>
             </View>
-            {/* Check if the firstTestResult is less than 70 or not available, then show the lock icon */}
             {!enabled && (!firstTestResult || firstTestResult < 70) && <Ionicons name="lock-closed-outline" size={22} color="#001AA1" />}
           </View>
           <View style={styles.cardAdvanceActivity}>
@@ -72,7 +69,6 @@ function Test({ level, navigation, enabled, updateResult, firstTestResult }) {
         >
           <View style={styles.testButton}>
             <Text style={{ color: "white", fontWeight: 500 }}>Take Test</Text>
-            {/* Check if the firstTestResult is less than 70 or not available, then show the lock icon */}
             {!enabled && (!firstTestResult || firstTestResult < 70) && <Ionicons name="lock-closed-outline" size={18} color="white" />}
           </View>
         </Pressable>

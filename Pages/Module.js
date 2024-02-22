@@ -1,4 +1,3 @@
-// Import useState from React
 import React, { useState } from 'react';
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, ScrollView, Pressable, Text } from "react-native";
@@ -14,6 +13,11 @@ function Module({ navigation }) {
     setFirstTestResult(result);
   };
 
+  const handleFirstTestCompletion = (result) => {
+    // Update first test result
+    updateFirstTestResult(result);
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -26,10 +30,16 @@ function Module({ navigation }) {
         <View style={styles.line}></View>
 
         {/* Level 1 */}
-        <Test level="1" navigation={navigation} enabled={true} updateResult={updateFirstTestResult} />
+        <Test 
+          level="1" 
+          navigation={navigation} 
+          enabled={true} 
+          firstTestResult={firstTestResult} 
+          updateResult={handleFirstTestCompletion}
+        />
 
         {/* Level 2 */}
-        {/* Pass firstTestResult as a prop */}
+        {/* Pass firstTestResult as a prop and enable the test only if firstTestResult is >= 70 */}
         <Test level="2" navigation={navigation} enabled={firstTestResult >= 70} firstTestResult={firstTestResult} />
 
         <StatusBar style="auto" />        
